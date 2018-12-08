@@ -4,7 +4,7 @@
 1.type `/[setting_command] [mail_title] | [mail_contents]` in slack  
 2.環境変数 `TO_ADDRESS`に設定されたメールアドレスにメールを送信する。(herokuの場合：SendGridを使用する)  
 3.メール送信結果をslackに投稿する。  
-![使い方サンプル](https://user-images.githubusercontent.com/12015851/49686088-b3e70b00-fb32-11e8-8d69-7463a33f5b1f.png)
+![使い方サンプル](https://user-images.githubusercontent.com/12015851/49686602-11cb2100-fb3a-11e8-8ac4-da3dd6cbaacc.png)
 
 ## use tool
 - heroku
