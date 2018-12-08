@@ -35,7 +35,7 @@ postSlack($sendResult, $mailTitle, $mailContent);
  *
  * @param string $title メール件名
  * @param string $content メール内容
- * @return string $statusCode ステータスコード
+ * @return integer $statusCode ステータスコード
  */
 function sendMail($title, $content)
 {
