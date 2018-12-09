@@ -20,8 +20,8 @@
       Request URL：`https://XXXX/post_mail.php`
     - Basic Informationより、Verification Token をコピーする(環境変数に使います)
     - Install your app to your workspace  
-      - Incomig Webhooks が設定される。
-        メール送信結果を投稿するslackチャンネルを選択し、投稿をAuthorize(許可)する。 
+      - Incomig Webhooks が設定される。  
+        メール送信結果を投稿するslackチャンネルを選択し、投稿をAuthorize(許可)する。  
         Incoming Webhooks URL をコピーする。(環境変数に使います)  
  
 - sendgrid
