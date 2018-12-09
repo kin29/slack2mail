@@ -16,16 +16,16 @@
     - Appを作成する。([Your Apps](https://api.slack.com/apps/) > Create New App)  
     Basic Information > Building Apps for Slack > Add features and functionality  
       - Slash Commands  
-      Request URL に　`https://XXXX/post_mail.php`を設定する。  
-      - Incomig Webhooks  
-      Incoming Webhooks URL をコピーする。(環境変数に使います)  
-      - Permission  
-      Redirect URLsを設定する。  
-    - Basic Informationより、Verification Token をコピーする(環境変数に使います)(環境変数に使います)
+      Command：slack command
+      Request URL：`https://XXXX/post_mail.php`
+    - Basic Informationより、Verification Token をコピーする(環境変数に使います)
     - Install your app to your workspace  
+      - Incomig Webhooks が設定される。
+        メール送信結果を投稿するslackチャンネルを選択し、投稿をAuthorize(許可)する。 
+        Incoming Webhooks URL をコピーする。(環境変数に使います)  
  
 - sendgrid
-    - API keyを取得する。([SendGridダッシュボード](https://app.sendgrid.com/) > Setting > API Keys より)
+    - API keyを取得する。([SendGridダッシュボード](https://app.sendgrid.com/) > 左ナビのSetting > API Keys より)
 
 - heroku
     - 環境変数を設定する。([herokuアプリ一覧](https://dashboard.heroku.com/apps/) > (アプリを選択) > Settings のConfig Vars）  
