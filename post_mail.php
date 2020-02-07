@@ -52,9 +52,9 @@ function sendMail($title, $content)
 
     //SendGridを使用する
     $email = new \SendGrid\Mail\Mail();
-    $email->setFrom($from);
+    $email->setFrom($from, "Example User");
     $email->setSubject($title);
-    $email->addTo($to);
+    $email->addTo($to, "Example User");
     $email->addContent("text/plain", $content);
     $sendGrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
     try {
