@@ -51,20 +51,22 @@ function sendMail($title, $content)
     */
 
     //SendGridを使用する
-    $email = new \SendGrid\Mail\Mail();
-    $email->setFrom($from, "Example User");
-    $email->setSubject($title);
-    $email->addTo($to, "Example User");
-    $email->addContent("text/plain", $content);
-    $sendGrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
-    try {
-        $response = $sendGrid->send($email);
-        return $response->statusCode();
-//        print_r($response->headers());
-//        print $response->body() . "\n";
-    } catch (Exception $e) {
-        echo 'Caught exception: '. $e->getMessage() ."\n";
-    }
+
+    return is_string($from) && filter_var($from, FILTER_VALIDATE_EMAIL);
+//    $email = new \SendGrid\Mail\Mail();
+//    $email->setFrom($from, "Example User");
+//    $email->setSubject($title);
+//    $email->addTo($to, "Example User");
+//    $email->addContent("text/plain", $content);
+//    $sendGrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+//    try {
+//        $response = $sendGrid->send($email);
+//        return $response->statusCode();
+////        print_r($response->headers());
+////        print $response->body() . "\n";
+//    } catch (Exception $e) {
+//        echo 'Caught exception: '. $e->getMessage() ."\n";
+//    }
 
 
     //$response->headers();
