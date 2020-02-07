@@ -23,7 +23,7 @@ if ($_POST['token'] != getenv('APP_VERIFICATION_TOKEN')) {
 $statusCode = sendMail($mailTitle, $mailContent);
 
 $sendResult = ($statusCode == 202) ? 'メール送信に成功しました。' : 'メール送信に失敗しました。';
-$sendResult .= "({$userName} さんにより実行されました。)";
+$sendResult .= "({$userName} さんにより実行されました。)[$statusCode]";
 
 //slackにメール送信結果を投稿する
 postSlack($sendResult, $mailTitle, $mailContent);
