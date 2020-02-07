@@ -51,17 +51,21 @@ function sendMail($title, $content)
     */
 
     //SendGridを使用する
-    $from = new SendGrid\Email(null, $from);
-    $subject = $title;
-    $to = new SendGrid\Email(null, $to);
-    $content = new SendGrid\Content('text/plain', $content);
-    $mail = new SendGrid\Mail($from, $subject, $to, $content);
+    $email = new \SendGrid\Mail\Mail();
+    $email->setFrom($from);
+    $email->setSubject($title);
+    $email->addTo($to);
+    $email->addContent("text/plain", $content);
+    $sendGrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+    try {
+        $response = $sendGrid->send($email);
+        return $response->statusCode() . "\n";
+//        print_r($response->headers());
+//        print $response->body() . "\n";
+    } catch (Exception $e) {
+        echo 'Caught exception: '. $e->getMessage() ."\n";
+    }
 
-    $apiKey = getenv('SENDGRID_API_KEY');
-    $sg = new \SendGrid($apiKey);
-
-    $response = $sg->client->mail()->send()->post($mail);
-    return $response->statusCode();
 
     //$response->headers();
     //$response->body();
