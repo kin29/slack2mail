@@ -1,48 +1,21 @@
-# This is a basic workflow to help you get started with Actions
+name: create dispatch event
 
-name: satis build
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   release:
     types: [published]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: composer-respository Clone
+      - name: Create GitHub dispatch event - repository-updated
         run: |
-           git clone https://github.com/kin29/composer-repository.git
-           git config --global user.name "${GITHUB_ACTOR}"
-           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-           git checkout -b update-repository-by-${GITHUB_REPOSITORY}
-
-      # Runs a single command using the runners shell
-      - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
-      - name: satis build
-        run: vendor/bin/satis build satis.json web
-
-      - name: Push build files
-        run: |
-          if (git diff --shortstat | grep '[0-9]'); then \
-            git add .; \
-            git commit -m "👕 Fixed satis build files by github-actions"; \
-            git push origin HEAD:${GITHUB_REF}; \
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          curl --request POST 'https://api.github.com/repos/kin29/composer-repository/dispatches' \
+          --header 'Authorization: Bearer ${{secrets.GITHUB_TOKEN}}' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+            "event_type": "repository-updated"
+          }'
