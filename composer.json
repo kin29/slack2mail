@@ -1,4 +1,11 @@
 {
+  "name": "kin29/slack2mail",
+  "authors": [
+    {
+      "name": "kin29",
+      "email": "kin29.com@gmail.com"
+    }
+  ],
   "require": {
     "sendgrid/sendgrid": "~5.0.9"
   }
