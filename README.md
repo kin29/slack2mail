@@ -32,7 +32,7 @@
     ```
     # slack app
     APP_VERIFICATION_TOKEN="token"
-    INCOMING_WEBHOOKURL="https://hooks.slack.com/services/XXX"  
+    INCOMING_WEBHOOK_URL="https://hooks.slack.com/services/XXX"  
     
     # sendgrid
     SENDGRID_API_KEY="test"  

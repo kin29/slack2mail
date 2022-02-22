@@ -99,7 +99,7 @@ function postSlack($sendResult, $title, $contents)
         )
     );
 
-    $IncomingWebHookURL = getenv('INCOMING_WEBHOOKURL');
+    $IncomingWebHookURL = getenv('INCOMING_WEBHOOK_URL');
     $curl = curl_init($IncomingWebHookURL);
     curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
