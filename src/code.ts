@@ -24,7 +24,7 @@ function doPost(e): void
   const mailContent = arrText[1];
 
   //不正チェック
-  if (postedToken != slackToken) {
+  if (postedToken !== slackToken) {
       postSlack('不正tokenのため、メール送信しませんでした。', mailTitle, mailContent);
   }
   //メール送信
