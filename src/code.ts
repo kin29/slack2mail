@@ -1,4 +1,6 @@
 // https://api.slack.com/apps/AENV5LULV/general
+import {Utils} from "./_utils";
+
 const slackToken = PropertiesService.getScriptProperties().getProperty('SLACK_VERIFICATION_TOKEN');
 const toAdress = PropertiesService.getScriptProperties().getProperty('TO_ADDRESS');
 const fromAdress = PropertiesService.getScriptProperties().getProperty('FROM_ADDRESS');
@@ -6,8 +8,10 @@ const incomingWebhookUrl = PropertiesService.getScriptProperties().getProperty('
 
 function doPost(e): void
 {
+  const utils = new Utils();
+
   const postDataContents = e.postData.contents; //token=xxx&text=title%7Ccontent&user_name=kin29.com
-  const postDataObject = toObjectFromQuery(postDataContents);
+  const postDataObject = utils.toObjectFromQuery(postDataContents);
   const postedToken = postDataObject.token;
   const text = postDataObject.text;
   const decodedText = decodeURIComponent(text);
@@ -69,16 +73,4 @@ function postSlack(sendResult, title, contents): void
   };
 
   UrlFetchApp.fetch(incomingWebhookUrl, options);
-}
-
-function toObjectFromQuery(queryString): object
-{
-  let queryObject = {};
-  const params = queryString.split('&');
-  for(var i = 0; i < params.length; i++) {
-    const param = params[i].split('=');
-    queryObject[param[0]] = param[1];
-  }
-
-  return queryObject;
 }
