@@ -4,7 +4,7 @@ const toAdress = PropertiesService.getScriptProperties().getProperty('TO_ADDRESS
 const fromAdress = PropertiesService.getScriptProperties().getProperty('FROM_ADDRESS');
 const incomingWebhookUrl = PropertiesService.getScriptProperties().getProperty('INCOMING_WEBHOOK_URL');
 
-function doPost(e)
+function doPost(e): void
 {
   const postDataContents = e.postData.contents; //token=xxx&text=title%7Ccontent&user_name=kin29.com
   const postDataObject = toObjectFromQuery(postDataContents);
@@ -20,20 +20,17 @@ function doPost(e)
   //不正チェック
   if (postedToken != slackToken) {
       postSlack('不正tokenのため、メール送信しませんでした。', mailTitle, mailContent);
-      return false;
   }
-
   //メール送信
   sendGoogleMail(mailTitle, mailContent);
 
   const sendResult = "メール送信に成功しました。(" + userName + ") さんにより実行されました。";
-
   //slackにメール送信結果を投稿する
-  postSlack(sendResult, mailTitle, mailContent);  
+  postSlack(sendResult, mailTitle, mailContent);
 }
 
 
-function sendGoogleMail(title, content)
+function sendGoogleMail(title, content): void
 {
   const options = {
     'from': fromAdress,
@@ -42,7 +39,7 @@ function sendGoogleMail(title, content)
 }
 
 
-function postSlack(sendResult, title, contents)
+function postSlack(sendResult, title, contents): void
 {
   let data = {
     'attachments': [
@@ -74,7 +71,7 @@ function postSlack(sendResult, title, contents)
   UrlFetchApp.fetch(incomingWebhookUrl, options);
 }
 
-function toObjectFromQuery(queryString)
+function toObjectFromQuery(queryString): object
 {
   let queryObject = {};
   const params = queryString.split('&');
