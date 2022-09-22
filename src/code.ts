@@ -1,5 +1,7 @@
 // https://api.slack.com/apps/AENV5LULV/general
-import {Utils} from "./_utils";
+import { postQueryFromSlack, Utils } from "./_utils";
+import URLFetchRequestOptions = GoogleAppsScript.URL_Fetch.URLFetchRequestOptions;
+import GmailAdvancedOptions = GoogleAppsScript.Gmail.GmailAdvancedOptions;
 
 const slackToken = PropertiesService.getScriptProperties().getProperty('SLACK_VERIFICATION_TOKEN');
 const toAddress = PropertiesService.getScriptProperties().getProperty('TO_ADDRESS');
@@ -11,7 +13,7 @@ function doPost(e): void
   const utils = new Utils();
 
   const postDataContents = e.postData.contents; //token=xxx&text=title%7Ccontent&user_name=kin29.com
-  const postDataObject = utils.toObjectFromQuery(postDataContents);
+  const postDataObject: postQueryFromSlack = utils.toObjectFromSlackQuery(postDataContents);
   const postedToken = postDataObject.token;
   const text = postDataObject.text;
   const decodedText = decodeURIComponent(text);
@@ -36,7 +38,7 @@ function doPost(e): void
 
 function sendGoogleMail(title, content): void
 {
-  const options = {
+  const options: GmailAdvancedOptions = {
     'from': fromAddress,
   };
   GmailApp.sendEmail(toAddress, title, content, options);
@@ -66,7 +68,7 @@ function postSlack(sendResult, title, contents): void
       }
     ]
   };
-  let options = {
+  let options: URLFetchRequestOptions = {
     'method' : 'post',
     'contentType': 'application/json',
     'payload' : JSON.stringify(data)
