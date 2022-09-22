@@ -2,8 +2,8 @@
 import {Utils} from "./_utils";
 
 const slackToken = PropertiesService.getScriptProperties().getProperty('SLACK_VERIFICATION_TOKEN');
-const toAdress = PropertiesService.getScriptProperties().getProperty('TO_ADDRESS');
-const fromAdress = PropertiesService.getScriptProperties().getProperty('FROM_ADDRESS');
+const toAddress = PropertiesService.getScriptProperties().getProperty('TO_ADDRESS');
+const fromAddress = PropertiesService.getScriptProperties().getProperty('FROM_ADDRESS');
 const incomingWebhookUrl = PropertiesService.getScriptProperties().getProperty('INCOMING_WEBHOOK_URL');
 
 function doPost(e): void
@@ -37,9 +37,9 @@ function doPost(e): void
 function sendGoogleMail(title, content): void
 {
   const options = {
-    'from': fromAdress,
+    'from': fromAddress,
   };
-  GmailApp.sendEmail(toAdress, title, content, options);
+  GmailApp.sendEmail(toAddress, title, content, options);
 }
 
 
